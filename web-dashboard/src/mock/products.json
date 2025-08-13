@@ -1,0 +1,97 @@
+{
+    "status": 200,
+    "message": "success",
+    "data": [
+        {
+            "id_product": 1,
+            "kode_product": "001",
+            "name_product": "Produk A",
+            "category_product": {
+                "id_category": 1,
+                "name_category": "Kategori 01",
+                "icon_category": "https://images.unsplash.com/photo-1750595132287-5a2368a7fdef?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyM3x8fGVufDB8fHx8fA%3D%3D"
+            },
+            "brand_product": {
+                "id_brand": 1,
+                "name_brand": "Brand 01"
+            },
+            "price_sell": 50000,
+            "price_grosir": [
+                {
+                    "id_grosir": 1,
+                    "min_qty": 3,
+                    "price_grosir": 45000
+                }
+            ],
+            "stock_product": 10,
+            "display_product": "true",
+            "display_stock": "true",
+            "recomendation_product": "true",
+            "image_product": "https://images.unsplash.com/photo-1750595132287-5a2368a7fdef?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyM3x8fGVufDB8fHx8fA%3D%3D",
+            "description_product": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste accusantium praesentium voluptas nihil eaque totam alias doloremque consequatur omnis esse."
+        },
+        {
+            "id_product": 2,
+            "kode_product": "003",
+            "name_product": "Produk B",
+            "category_product": {},
+            "brand_product": {},
+            "price_sell": 30000,
+            "price_grosir": [
+                {
+                    "id_grosir": 1,
+                    "min_qty": 3,
+                    "price_grosir": 25000
+                }
+            ],
+            "stock_product": 10,
+            "display_product": "true",
+            "display_stock": "true",
+            "recomendation_product": "true",
+            "image_product": "https://images.unsplash.com/photo-1750595132287-5a2368a7fdef?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyM3x8fGVufDB8fHx8fA%3D%3D",
+            "description_product": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste accusantium praesentium voluptas nihil eaque totam alias doloremque consequatur omnis esse."
+        },
+        {
+            "id_product": 3,
+            "kode_product": "003",
+            "name_product": "Produk C",
+            "category_product": {},
+            "brand_product": {},
+            "price_sell": 50000,
+            "price_grosir": [
+                {
+                    "id_grosir": 1,
+                    "min_qty": 3,
+                    "price_grosir": 45000
+                }
+            ],
+            "stock_product": 10,
+            "display_product": "true",
+            "display_stock": "true",
+            "recomendation_product": "true",
+            "image_product": "https://images.unsplash.com/photo-1750595132287-5a2368a7fdef?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyM3x8fGVufDB8fHx8fA%3D%3D",
+            "description_product": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste accusantium praesentium voluptas nihil eaque totam alias doloremque consequatur omnis esse."
+        },
+        {
+            "id_product": 4,
+            "kode_product": "004",
+            "name_product": "Produk D",
+            "category_product": {},
+            "brand_product": {},
+            "price_sell": 50000,
+            "price_grosir": [
+                {
+                    "id_grosir": 1,
+                    "min_qty": 3,
+                    "price_grosir": 45000
+                }
+            ],
+            "stock_product": 10,
+            "display_product": "true",
+            "display_stock": "true",
+            "recomendation_product": "true",
+            "image_product": "https://images.unsplash.com/photo-1750595132287-5a2368a7fdef?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyM3x8fGVufDB8fHx8fA%3D%3D",
+            "description_product": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste accusantium praesentium voluptas nihil eaque totam alias doloremque consequatur omnis esse."
+        }
+    ]
+}

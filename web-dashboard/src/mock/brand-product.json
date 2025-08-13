@@ -1,0 +1,18 @@
+{
+    "status": 200,
+    "message": "success",
+    "data": [
+        {
+            "id_brand": 1,
+            "name_brand": "Brand 1"
+        },
+        {
+            "id_brand": 2,
+            "name_brand": "Brand 2"
+        },
+        {
+            "id_brand": 3,
+            "name_brand": "Brand 3"
+        }
+    ]
+}

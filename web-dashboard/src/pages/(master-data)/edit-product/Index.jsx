@@ -1,0 +1,334 @@
+import {
+  Input,
+  Switch,
+  Textarea,
+  TextInput,
+  Button,
+  FileInput,
+} from "@mantine/core";
+import { useEffect, useRef, useState } from "react";
+import { BsBank, BsChevronLeft, BsEye, BsInfo, BsUpload } from "react-icons/bs";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { useFetchBrandProduct } from "../../../utils/fetch/useBrandProduct";
+import { useFetchCategoryProduct } from "../../../utils/fetch/useCategoryProduct";
+import {
+  useEditProduct,
+  useUpdateProduct,
+} from "../../../utils/fetch/useProduct";
+export default function EditProductPage() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { data: productEdit } = useEditProduct(id);
+  const { data: category_products } = useFetchCategoryProduct();
+  const { data: brand_products } = useFetchBrandProduct();
+  const inputFocus = useRef(null);
+  const { loading, updateData } = useUpdateProduct();
+  const [form, setForm] = useState({
+    sku_product: "",
+    name_product: "",
+    category_id: "",
+    brand_id: "",
+    price_sell: "",
+    price_grosir: [
+      {
+        price_grosir: "",
+        min_qty: "",
+      },
+      {
+        price_grosir: "",
+        min_qty: "",
+      },
+      {
+        price_grosir: "",
+        min_qty: "",
+      },
+    ],
+    display_product: true,
+    display_stock: false,
+    stock_product: 0,
+    image_product: "",
+    image_product_preview: "",
+    description_product: "",
+  });
+  const changePriceGrosir = (id, value) => {
+    const newPrice = form.price_grosir.map((price, index) => {
+      if (index == id) {
+        return { ...price, price_grosir: value };
+      }
+      return price;
+    });
+    setForm({ ...form, price_grosir: newPrice });
+  };
+
+  const changeQtyGrosir = (id, value) => {
+    const newPrice = form.price_grosir.map((price, index) => {
+      if (index == id) {
+        return { ...price, min_qty: value };
+      }
+      return price;
+    });
+    setForm({ ...form, price_grosir: newPrice });
+  };
+
+  const handleUploadImage = (e) => {
+    setForm({
+      ...form,
+      image_product: e,
+      image_product_preview: URL.createObjectURL(e),
+    });
+  };
+  const handleUpdate = async (event) => {
+    event.preventDefault();
+    await updateData(form, id, () => navigate("/master-data/product"));
+  };
+
+  useEffect(() => {
+    if (productEdit) {
+      setForm({
+        ...form,
+        sku_product: productEdit.sku_product,
+        name_product: productEdit.name_product,
+        category_id: productEdit.category_id,
+        category_name: productEdit.category
+          ? productEdit.category.name_category
+          : "",
+        brand_id: productEdit.brand_id,
+        brand_name: productEdit.brand ? productEdit.brand.name_brand : "",
+        price_sell: Number.parseInt(productEdit.price_sell),
+        display_product: productEdit.display_product,
+        display_stock: productEdit.display_stock,
+        stock_product: productEdit.stock_product,
+        image_product_preview: productEdit.image_product,
+        description_product: productEdit.description_product,
+        price_grosir:
+          productEdit.grosir.length > 0
+            ? productEdit.grosir
+            : form.price_grosir,
+      });
+    }
+  }, [productEdit]);
+  useEffect(() => {
+    if (inputFocus.current) {
+      inputFocus.current.focus();
+    }
+  }, []);
+  return (
+    <div className="w-full bg-white min-h-screen p-4">
+      <form action="" onSubmit={handleUpdate}>
+        <div className="my-4">
+          <p className="text-2xl font-bold flex items-center">
+            <Link to="/master-data/product" className="mr-2">
+              <BsChevronLeft />
+            </Link>
+            <span>Edit Produk </span>
+          </p>
+        </div>
+        <div className="w-full my-4">
+          <p className="text-xl font-bold flex items-center bg-blue-500 text-white p-2">
+            <BsInfo />
+            <span>General Information *</span>
+          </p>
+          <div className="my-4">
+            <TextInput
+              label="Kode Produk (unique)"
+              placeholder="Barcode atau kode plu"
+              required
+              ref={inputFocus}
+              size="md"
+              type="number"
+              min="0"
+              value={form.sku_product}
+              onChange={(e) =>
+                setForm({ ...form, sku_product: e.target.value })
+              }
+            />
+          </div>
+          <div className="my-4">
+            <TextInput
+              label="Nama Produk"
+              required
+              size={"md"}
+              value={form.name_product}
+              onChange={(e) =>
+                setForm({ ...form, name_product: e.target.value })
+              }
+            />
+          </div>
+          <div className=" my-4">
+            <label htmlFor="category_id" className="font-bold">
+              Kategori Produk
+            </label>
+            <select
+              id="category_id"
+              required
+              className="w-full p-3 border-2 border-slate-200 outline-0"
+              onChange={(e) =>
+                setForm({ ...form, category_id: e.target.value })
+              }
+            >
+              <option value={form.category_id}>
+                {form.category_name
+                  ? form.category_name
+                  : "-- Pilih Kategori --"}{" "}
+              </option>
+              {category_products.map((category) => (
+                <option key={category.id_category} value={category.id_category}>
+                  {category.name_category}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="my-4">
+            <label htmlFor="brand_id" className="font-bold">
+              Brand Produk
+            </label>
+            <select
+              id="brand_id"
+              required
+              className="w-full p-3 border-2 border-slate-200 outline-0 "
+              onChange={(e) => setForm({ ...form, brand_id: e.target.value })}
+            >
+              <option value={form.id_brand}>
+                {form.brand_name ? form.brand_name : "-- Pilih Brand --"}
+              </option>
+              {brand_products.map((brand) => (
+                <option key={brand.id_brand} value={brand.id_brand}>
+                  {brand.name_brand}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <div className="w-full my-4">
+          <p className="text-xl font-bold flex p-2 items-center bg-yellow-500 text-white">
+            <BsBank className="mr-2" />
+            <span>Pricing</span>
+          </p>
+          <div className="w-full my-4">
+            <TextInput
+              label="Harga Pokok"
+              leftSection={<span>RP</span>}
+              size="md"
+              required
+              type={"number"}
+              min="0"
+              value={form.price_sell}
+              onChange={(e) => setForm({ ...form, price_sell: e.target.value })}
+            />
+          </div>
+          <p className="font-bold mb-4">Harga Grosir</p>
+          {form.price_grosir.map((grosir, index) => (
+            <div className="flex md:flex-nowrap flex-wrap mt-4" key={index}>
+              <div className="md:w-1/2 w-full mb-2 mr-2 flex items-center">
+                <p className="mr-2">Min Qty &gt;=</p>
+                <div className="w-[80%]">
+                  <Input
+                    size="md"
+                    type={"number"}
+                    min="0"
+                    placeholder="Grosir 2"
+                    value={grosir.min_qty}
+                    onChange={(e) => changeQtyGrosir(index, e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="md:w-1/2 w-full mb-2 mr-2">
+                <Input
+                  placeholder=""
+                  leftSection={<span>Rp</span>}
+                  size="md"
+                  min="0"
+                  type="number"
+                  value={grosir.price_grosir}
+                  onChange={(e) => changePriceGrosir(index, e.target.value)}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="w-full my-4">
+          <p className="text-xl font-bold flex items-center bg-purple-500 text-white p-2">
+            <BsEye className="mr-2" />
+            <span>Visibilitas</span>
+          </p>
+          <div className="my-4 w-full">
+            <Switch
+              label="Tampilkan Produk"
+              size="md"
+              value={form.display_product}
+              checked={form.display_product}
+              onChange={(e) =>
+                setForm({ ...form, display_product: e.currentTarget.checked })
+              }
+            />
+          </div>
+          <div className="my-4 w-full">
+            <Switch
+              label="Tampilkan Stok"
+              size={"md"}
+              value={form.display_stock}
+              checked={form.display_stock}
+              onChange={(e) =>
+                setForm({ ...form, display_stock: e.currentTarget.checked })
+              }
+            />
+          </div>
+          <div className="w-full my-4">
+            <p className="font-bold">Stok Produk</p>
+            <TextInput
+              placeholder="Stok produk"
+              defaultValue={0}
+              required
+              value={form.stock_product}
+              type="number"
+              min="0"
+              onChange={(e) => {
+                setForm({
+                  ...form,
+                  stock_product: e.target.value,
+                });
+              }}
+            />
+          </div>
+          <div className="w-full my-4">
+            <p className="font-bold">Gambar Produk</p>
+            {form.image_product_preview ? (
+              <img
+                src={form.image_product_preview}
+                className="w-[80px] h-[80px] mb-2"
+              />
+            ) : (
+              <div className="w-[80px] h-[80px] bg-slate-200 mb-2"></div>
+            )}
+            <FileInput
+              leftSection={<BsUpload />}
+              placeholder="Upload gambar"
+              size={"md"}
+              type="image/*"
+              onChange={handleUploadImage}
+            />
+          </div>
+          <div className="w-full my-4">
+            <Textarea
+              label="Deskripsi"
+              size={"md"}
+              required
+              rows="5"
+              value={form.description_product}
+              onChange={(e) =>
+                setForm({ ...form, description_product: e.target.value })
+              }
+            />
+          </div>
+        </div>
+        <div className="w-full my-4">
+          <Button fullWidth size="md" type="submit" loading={loading}>
+            Save
+          </Button>
+        </div>
+      </form>
+    </div>
+  );
+}
