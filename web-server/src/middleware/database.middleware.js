@@ -1,4 +1,4 @@
-const { sequelize } = require("../database/loader");
+const { sequelize } = require("../sequelize/db/models/index");
 
 async function DatabaseMiddleware(req, res, next) {
     try {

@@ -1,1 +1,7 @@
 @import "tailwindcss";
+::-webkit-scrollbar {
+  width: 2px;
+}
+::-webkit-scrollbar-button {
+  width: 2px;
+}

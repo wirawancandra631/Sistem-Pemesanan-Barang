@@ -1,6 +1,8 @@
 import { Button, TextInput } from "@mantine/core";
 import { useState } from "react";
 import { BsEnvelope, BsEye, BsEyeSlash } from "react-icons/bs";
+import { CiLock } from "react-icons/ci";
+
 import { useLogin } from "../../utils/fetch/useAuth";
 export default function LoginPage() {
   const [form, setForm] = useState({
@@ -11,7 +13,7 @@ export default function LoginPage() {
   const { loading, handleLogin } = useLogin();
   const handleSubmit = async (event) => {
     event.preventDefault();
-    handleLogin(form);
+    await handleLogin(form);
   };
   return (
     <main className="w-full min-h-screen bg-cover bg-no-repeat bg-center  bg-[url(https://plus.unsplash.com/premium_photo-1681487909667-f7cd75b59d5a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHNhbGV8ZW58MHwwfDB8fHww)] flex items-center justify-center p-10">
@@ -21,7 +23,10 @@ export default function LoginPage() {
         onSubmit={handleSubmit}
       >
         <div className="w-full ">
-          <p className="text-center font-bold text-2xl">Login</p>
+          <p className="text-center font-bold text-2xl flex justify-center items-center space-x-4">
+            <CiLock />
+            <span>Login</span>
+          </p>
         </div>
         <div className="my-6">
           <TextInput
@@ -55,7 +60,14 @@ export default function LoginPage() {
           />
         </div>
         <div className="my-6">
-          <Button type="submit" fullWidth size={"md"} disabled={loading}>
+          <Button
+            type="submit"
+            color={"orange"}
+            fullWidth
+            size={"md"}
+            disabled={loading}
+            className="font-bold"
+          >
             LOGIN
           </Button>
         </div>

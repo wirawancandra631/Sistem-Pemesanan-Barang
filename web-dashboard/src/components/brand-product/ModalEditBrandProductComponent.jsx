@@ -30,9 +30,6 @@ function ModalEditBrandProductComponent({ opened, onClose, onSuccess, id }) {
     <Modal opened={opened} onClose={onClose}>
       <form action="" className="" onSubmit={handleUpdate}>
         <div className="my-4">
-          <p className="font-bold">Edit Brand Produk</p>
-        </div>
-        <div className="my-4">
           <TextInput
             label="Nama Brand"
             placeholder="Adidas"
@@ -45,7 +42,13 @@ function ModalEditBrandProductComponent({ opened, onClose, onSuccess, id }) {
         </div>
 
         <div className="my-4">
-          <Button type="submit" size="md" fullWidth disabled={loading}>
+          <Button
+            type="submit"
+            color={"orange"}
+            size="md"
+            fullWidth
+            disabled={loading}
+          >
             Save
           </Button>
         </div>

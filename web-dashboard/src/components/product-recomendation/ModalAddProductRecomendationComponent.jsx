@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal, TextInput, Button } from "@mantine/core";
 import { BsSearch, BsStar } from "react-icons/bs";
-import { moneyFormat } from "../../utils/moneyFormat";
+import { moneyFormat } from "../../utils/helper/moneyFormat";
 import { useSearchProduct } from "../../utils/fetch/useProduct";
 import { usePostProductRecomendation } from "../../utils/fetch/useProductRecomendation";
 function ModalAddProductRecomendationComponent({ opened, onClose, onSuccess }) {

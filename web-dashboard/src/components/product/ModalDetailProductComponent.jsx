@@ -1,18 +1,19 @@
-import React, { useEffect } from "react";
-import { Badge, List, Modal, Table } from "@mantine/core";
-import { useShowProduct } from "../../utils/fetch/useProduct";
-import LoadingDataComponent from "../reusable/LoadingDataComponent";
-import EmptyDataComponent from "../reusable/EmptyDataComponent";
-import { moneyFormat } from "../../utils/moneyFormat";
+import React from "react";
+import { Badge, List, Modal } from "@mantine/core";
+import { Table, Tbody, Tr, Td } from "@/components/reusable/TableComponent";
+import { useShowProduct } from "@/utils/fetch/useProduct";
+import LoadingDataComponent from "@/components/reusable/LoadingDataComponent";
+import EmptyDataComponent from "@/components/reusable/EmptyDataComponent";
+import { moneyFormat } from "@/utils/helper/moneyFormat";
 function ModalDetailProductComponent({ opened, onClose, id }) {
-  const { data: product, loading, fetchData } = useShowProduct(opened, id);
+  const { data: product, loading } = useShowProduct(opened, id);
   return (
-    <Modal opened={opened} onClose={onClose} size="xl">
+    <Modal opened={opened} onClose={onClose} size="full">
       {loading ? (
         <LoadingDataComponent />
       ) : product ? (
         <>
-          <div className="w-full p-4">
+          <div className="w-full p-2">
             <p className="font-bold">Detail Produk</p>
           </div>
           <div className="my-4 border border-slate-200 p-2 w-[110px] h-[110px]">
@@ -27,39 +28,45 @@ function ModalDetailProductComponent({ opened, onClose, id }) {
               </div>
             )}
           </div>
-          <Table withTableBorder withColumnBorders>
-            <Table.Tbody>
-              <Table.Tr>
-                <Table.Td>Nama Produk</Table.Td>
-                <Table.Td>{product.name_product}</Table.Td>
-              </Table.Tr>
+          <Table center={false}>
+            <Tbody>
+              <Tr>
+                <Td>Sku Produk</Td>
+                <Td className="text-right">{product.sku_product}</Td>
+              </Tr>
+              <Tr>
+                <Td>Nama Produk</Td>
+                <Td className="text-right">{product.name_product}</Td>
+              </Tr>
 
-              <Table.Tr>
-                <Table.Td>Merek Produk</Table.Td>
-                <Table.Td>
+              <Tr>
+                <Td>Merek Produk</Td>
+                <Td className="text-right">
                   <Badge color={"brown"}>
                     {product.brand ? product.brand.name_brand : "-"}
                   </Badge>
-                </Table.Td>
-              </Table.Tr>
+                </Td>
+              </Tr>
 
-              <Table.Tr>
-                <Table.Td>Kategori Produk</Table.Td>
-                <Table.Td>
+              <Tr>
+                <Td>Kategori Produk</Td>
+                <Td className="text-right">
                   <Badge color={"green"}>
                     {product.category ? product.category.name_category : "-"}
                   </Badge>
-                </Table.Td>
-              </Table.Tr>
+                </Td>
+              </Tr>
 
-              <Table.Tr>
-                <Table.Td>Harga Pokok</Table.Td>
-                <Table.Td>{moneyFormat(product.price_sell)}</Table.Td>
-              </Table.Tr>
+              <Tr>
+                <Td>Harga Pokok</Td>
+                <Td className="text-right">
+                  {moneyFormat(product.price_sell)}
+                </Td>
+              </Tr>
 
-              <Table.Tr>
-                <Table.Td>Harga Grosir</Table.Td>
-                <Table.Td>
+              <Tr>
+                <Td>Harga Grosir</Td>
+                <Td className="text-right">
                   <List>
                     {product.grosir.length > 0
                       ? product.grosir.map((price) => (
@@ -70,49 +77,49 @@ function ModalDetailProductComponent({ opened, onClose, id }) {
                         ))
                       : "-"}
                   </List>
-                </Table.Td>
-              </Table.Tr>
+                </Td>
+              </Tr>
 
-              <Table.Tr>
-                <Table.Td>Stok </Table.Td>
-                <Table.Td>{product.stock_product}</Table.Td>
-              </Table.Tr>
+              <Tr>
+                <Td>Stok </Td>
+                <Td className="text-right">{product.stock_product}</Td>
+              </Tr>
 
-              <Table.Tr>
-                <Table.Td>Tampilkan Stok </Table.Td>
-                <Table.Td>
+              <Tr>
+                <Td>Tampilkan Stok </Td>
+                <Td className="text-right">
                   {product.display_stock ? (
                     <Badge color={"blue"}>YES</Badge>
                   ) : (
                     <Badge color={"red"}>NO</Badge>
                   )}
-                </Table.Td>
-              </Table.Tr>
-              <Table.Tr>
-                <Table.Td>Tampilkan Produk </Table.Td>
-                <Table.Td>
+                </Td>
+              </Tr>
+              <Tr>
+                <Td>Tampilkan Produk </Td>
+                <Td className="text-right">
                   {product.display_product ? (
                     <Badge color={"blue"}>YES</Badge>
                   ) : (
                     <Badge color={"red"}>NO</Badge>
                   )}
-                </Table.Td>
-              </Table.Tr>
-              <Table.Tr>
-                <Table.Td>Rekomendasikan Produk </Table.Td>
-                <Table.Td>
+                </Td>
+              </Tr>
+              <Tr>
+                <Td>Rekomendasikan Produk </Td>
+                <Td className="text-right">
                   {product.recomendation_product ? (
                     <Badge color={"blue"}>YES</Badge>
                   ) : (
                     <Badge color={"red"}>NO</Badge>
                   )}{" "}
-                </Table.Td>
-              </Table.Tr>
-              <Table.Tr>
-                <Table.Td>Deskripsi Produk </Table.Td>
-                <Table.Td>{product.description_product}</Table.Td>
-              </Table.Tr>
-            </Table.Tbody>
+                </Td>
+              </Tr>
+              <Tr>
+                <Td>Deskripsi Produk </Td>
+                <Td>{product.description_product}</Td>
+              </Tr>
+            </Tbody>
           </Table>
         </>
       ) : (

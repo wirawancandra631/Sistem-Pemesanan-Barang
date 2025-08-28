@@ -40,14 +40,10 @@ function ModalEditCategoryProductComponent({ opened, onClose, id, onSuccess }) {
     <Modal opened={opened} onClose={onClose}>
       <form action="" className="" onSubmit={handleUpdate}>
         <div className="my-4">
-          <p className="font-bold">Edit Kategori Produk</p>
-        </div>
-        <div className="my-4">
           <TextInput
             label="Nama Kategori"
             placeholder="Makanan"
             required
-            size={"md"}
             data-autofocus
             onChange={(e) =>
               setForm({ ...form, name_category: e.target.value })
@@ -68,13 +64,19 @@ function ModalEditCategoryProductComponent({ opened, onClose, id, onSuccess }) {
           <FileInput
             label="Ikon Kategori"
             placeholder="Upload"
-            size={"md"}
             leftSection={<BsUpload />}
             onChange={handleImageUpload}
+            accept="image/*"
           />
         </div>
         <div className="my-4">
-          <Button type="submit" size="md" fullWidth disabled={loading}>
+          <Button
+            type="submit"
+            color={"orange"}
+            size="md"
+            fullWidth
+            disabled={loading}
+          >
             Save
           </Button>
         </div>

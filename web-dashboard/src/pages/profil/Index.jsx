@@ -15,7 +15,7 @@ export default function ProfilPage() {
       email: user.email,
       password: "",
     });
-  }, []);
+  }, [user]);
   const handleUpdate = (event) => {
     event.preventDefault();
     updateData(form);
@@ -23,40 +23,47 @@ export default function ProfilPage() {
   };
 
   return (
-    <div className="w-full p-4 bg-white">
-      <div className="w-[100px] h-[100px] bg-slate-200 rounded-full"></div>
-      <p className="mt-4">Email {user.email}</p>
-      <p>Password *****</p>
-      <Button
-        className="mt-4"
-        color={"green"}
-        onClick={() => setShowFormEdit(!showFormEdit)}
-      >
-        Ubah Profil
-      </Button>
-      {showFormEdit ? (
-        <form action="" className="w-full mt-4" onSubmit={handleUpdate}>
-          <div className="my-4">
-            <TextInput
-              label="Email"
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-            />
-          </div>
+    <>
+      <div className="w-full p-4 bg-white mb-4">
+        <p className="font-bold">Edit Profil</p>
+      </div>
+      <div className="w-full p-4 bg-white">
+        <div className="w-[100px] h-[100px] bg-slate-200 flex items-center justify-center rounded-full">
+          <p className="text-3xl font-bold">{user.email[0]}</p>
+        </div>
+        <p className="mt-4">Email {user.email}</p>
+        <p>Password *****</p>
+        <Button
+          className="mt-4"
+          color={"green"}
+          onClick={() => setShowFormEdit(!showFormEdit)}
+        >
+          Ubah Profil
+        </Button>
+        {showFormEdit ? (
+          <form action="" className="w-full mt-4" onSubmit={handleUpdate}>
+            <div className="my-4">
+              <TextInput
+                label="Email"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+              />
+            </div>
 
-          <div className="my-4">
-            <TextInput
-              label="Ubah Password"
-              onChange={(e) =>
-                setForm({ ...form, password: e.target.password })
-              }
-            />
-          </div>
-          <div className="my-4">
-            <Button type="submit">Save</Button>
-          </div>
-        </form>
-      ) : null}
-    </div>
+            <div className="my-4">
+              <TextInput
+                label="Ubah Password"
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
+              />
+            </div>
+            <div className="my-4">
+              <Button type="submit" color={"orange"}>
+                Save
+              </Button>
+            </div>
+          </form>
+        ) : null}
+      </div>
+    </>
   );
 }

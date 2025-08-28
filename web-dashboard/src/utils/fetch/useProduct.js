@@ -8,7 +8,7 @@ export function useFetchProduct() {
     const fetchData = async (url = BASEURLPRODUCT) => {
         try {
             const res = await axiosAuth.get(url);
-            const { data } = await res;
+            const { data } = await res.data;
             setData(data)
         }
         catch (m) {
@@ -34,7 +34,7 @@ export function useFetchProduct() {
         }
     }
     useEffect(() => {
-        fetchData(BASEURLPRODUCT)
+        fetchData()
     }, [])
     return {
         data,

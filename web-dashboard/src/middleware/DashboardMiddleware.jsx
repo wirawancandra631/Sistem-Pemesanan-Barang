@@ -1,5 +1,6 @@
+import { LoadingOverlay } from "@mantine/core";
 import React, { createContext } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useFetchProfil } from "../utils/fetch/useProfil";
 export const UserContext = createContext();
 function DashboardMiddleware({ children }) {
@@ -12,7 +13,14 @@ function DashboardMiddleware({ children }) {
       <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
     );
   } else {
-    return null;
+    return (
+      <LoadingOverlay
+        visible={true}
+        zIndex={1000}
+        overlayProps={{ radius: "sm", blur: 2 }}
+        loaderProps={{ color: "pink", type: "bars" }}
+      />
+    );
   }
 }
 

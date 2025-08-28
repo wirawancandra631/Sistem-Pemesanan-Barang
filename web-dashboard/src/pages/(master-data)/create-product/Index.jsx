@@ -5,6 +5,7 @@ import {
   TextInput,
   Button,
   FileInput,
+  Tooltip,
 } from "@mantine/core";
 import { useEffect, useRef, useState } from "react";
 import { BsBank, BsChevronLeft, BsEye, BsInfo, BsUpload } from "react-icons/bs";
@@ -100,23 +101,23 @@ export default function CreateProductPage() {
             <span>General Information *</span>
           </p>
           <div className="my-4">
-            <TextInput
-              label="Kode Produk (unique)"
-              placeholder="Barcode atau kode plu"
-              required
-              ref={inputFocus}
-              size="md"
-              type={"number"}
-              onChange={(e) =>
-                setForm({ ...form, sku_product: e.target.value })
-              }
-            />
+            <Tooltip label="Sku produk harus unik dan berbeda">
+              <TextInput
+                label="Sku Produk (unique)"
+                placeholder="Barcode atau kode plu"
+                required
+                ref={inputFocus}
+                type={"number"}
+                onChange={(e) =>
+                  setForm({ ...form, sku_product: e.target.value })
+                }
+              />
+            </Tooltip>
           </div>
           <div className="my-4">
             <TextInput
               label="Nama Produk"
               required
-              size={"md"}
               onChange={(e) =>
                 setForm({ ...form, name_product: e.target.value })
               }
@@ -171,8 +172,7 @@ export default function CreateProductPage() {
             <TextInput
               type={"number"}
               label="Harga Pokok"
-              leftSection={<span>RP</span>}
-              size="md"
+              leftSection={<span>IDR</span>}
               required
               min="0"
               onChange={(e) => setForm({ ...form, price_sell: e.target.value })}
@@ -184,7 +184,6 @@ export default function CreateProductPage() {
               <p className="mr-2">Min Qty &gt;=</p>
               <div className="w-[80%]">
                 <Input
-                  size="md"
                   type={"number"}
                   placeholder="Grosir 1"
                   onChange={(e) => changeQtyGrosir(0, e.target.value)}
@@ -195,8 +194,7 @@ export default function CreateProductPage() {
             <div className="md:w-1/2 w-full mb-2 mr-2">
               <Input
                 placeholder=""
-                leftSection={<span>Rp</span>}
-                size="md"
+                leftSection={<span>IDR</span>}
                 onChange={(e) => changePriceGrosir(0, e.target.value)}
               />
             </div>
@@ -206,7 +204,6 @@ export default function CreateProductPage() {
               <p className="mr-2">Min Qty &gt;=</p>
               <div className="w-[80%]">
                 <Input
-                  size="md"
                   type={"number"}
                   placeholder="Grosir 2"
                   onChange={(e) => changeQtyGrosir(1, e.target.value)}
@@ -217,8 +214,7 @@ export default function CreateProductPage() {
             <div className="md:w-1/2 w-full mb-2 mr-2">
               <Input
                 placeholder=""
-                leftSection={<span>Rp</span>}
-                size="md"
+                leftSection={<span>IDR</span>}
                 onChange={(e) => changePriceGrosir(1, e.target.value)}
               />
             </div>
@@ -228,7 +224,6 @@ export default function CreateProductPage() {
               <p className="mr-2">Min Qty &gt;=</p>
               <div className="w-[80%]">
                 <Input
-                  size="md"
                   type={"number"}
                   placeholder="Grosir 3"
                   onChange={(e) => changeQtyGrosir(2, e.target.value)}
@@ -239,8 +234,7 @@ export default function CreateProductPage() {
             <div className="md:w-1/2 w-full mb-2 mr-2">
               <Input
                 placeholder=""
-                leftSection={<span>Rp</span>}
-                size="md"
+                leftSection={<span>IDR</span>}
                 onChange={(e) => changePriceGrosir(2, e.target.value)}
               />
             </div>
@@ -255,7 +249,7 @@ export default function CreateProductPage() {
             <Switch
               label="Tampilkan Produk"
               defaultChecked={true}
-              size="md"
+              color="green"
               onChange={(e) =>
                 setForm({ ...form, display_product: e.currentTarget.checked })
               }
@@ -265,7 +259,7 @@ export default function CreateProductPage() {
           <div className="my-4 w-full">
             <Switch
               label="Tampilkan Stok"
-              size={"md"}
+              color="green"
               onChange={(e) =>
                 setForm({ ...form, display_stock: e.currentTarget.checked })
               }
@@ -301,7 +295,6 @@ export default function CreateProductPage() {
             <FileInput
               leftSection={<BsUpload />}
               placeholder="Upload gambar"
-              size={"md"}
               accept="image/*"
               onChange={handleUploadImage}
             />
@@ -309,7 +302,6 @@ export default function CreateProductPage() {
           <div className="w-full my-4">
             <Textarea
               label="Deskripsi"
-              size={"md"}
               required
               rows="5"
               onChange={(e) =>
@@ -319,7 +311,13 @@ export default function CreateProductPage() {
           </div>
         </div>
         <div className="w-full my-4">
-          <Button fullWidth size="md" type="submit" disabled={loading}>
+          <Button
+            fullWidth
+            size="md"
+            color={"orange"}
+            type="submit"
+            disabled={loading}
+          >
             Submit
           </Button>
         </div>

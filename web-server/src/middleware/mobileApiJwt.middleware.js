@@ -10,8 +10,8 @@ async function mobileApiJwtMiddleware(req, res, next) {
             next()
         }
         catch (m) {
-            res.status(422).json({
-                status: 422,
+            res.status(401).json({
+                status: 401,
                 message: m.message
             })
         }

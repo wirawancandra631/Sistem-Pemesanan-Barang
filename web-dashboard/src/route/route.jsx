@@ -8,10 +8,16 @@ import EditProductPage from "@/pages/(master-data)/edit-product/Index";
 import CategoryProductPage from "@/pages/(master-data)/category-product/Index";
 import BrandProductPage from "@/pages/(master-data)/brand-product/Index";
 import ProductRecomendationPage from "@/pages/(marketing)/product-recomendation/Index";
-import CustomerPage from "../pages/customer/Index";
+import CustomerPage from "../pages/(customer)/customer/Index";
 import ProfilPage from "../pages/profil/Index";
 import DashboardMiddleware from "../middleware/DashboardMiddleware";
 import LogoutPage from "../pages/auth/LogoutPage";
+import ProductDiscountPage from "../pages/(marketing)/product-discount/Index";
+import UserSettingsPage from "../pages/(settings)/user-settings/Index";
+import StoreDecorationPage from "../pages/(settings)/store-decoration/Index";
+import NotFoundPage from "../pages/not-found/Index";
+import CustomerImportDataPage from "../pages/(customer)/customer-import/Index";
+import CustomerSyncDataPage from "../pages/(customer)/customer-sync/Index";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -49,13 +55,38 @@ const router = createBrowserRouter([
         path: "/marketing/product-recomendation",
         element: <ProductRecomendationPage />,
       },
+
       {
-        path: "/customer",
+        path: "/marketing/product-discount",
+        element: <ProductDiscountPage />,
+      },
+
+      {
+        path: "/customer/list",
         element: <CustomerPage />,
       },
+
       {
-        path: "/profil",
+        path: "/customer/import",
+        element: <CustomerImportDataPage />,
+      },
+
+      {
+        path: "/customer/sync",
+        element: <CustomerSyncDataPage />,
+      },
+
+      {
+        path: "/settings/user/profil",
         element: <ProfilPage />,
+      },
+      {
+        path: "/settings/user",
+        element: <UserSettingsPage />,
+      },
+      {
+        path: "/settings/store-decoration",
+        element: <StoreDecorationPage />,
       },
     ],
   },
@@ -66,6 +97,10 @@ const router = createBrowserRouter([
   {
     path: "/logout",
     element: <LogoutPage />,
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);
 

@@ -32,14 +32,10 @@ function ModalAddCategoryProductComponent({ opened, onClose, onSuccess }) {
     <Modal opened={opened} onClose={onClose}>
       <form action="" className="" onSubmit={handlePost}>
         <div className="my-4">
-          <p className="font-bold">Buat Kategori Produk</p>
-        </div>
-        <div className="my-4">
           <TextInput
             label="Nama Kategori"
             placeholder="Makanan"
             required
-            size={"md"}
             data-autofocus
             onChange={(e) =>
               setForm({ ...form, name_category: e.target.value })
@@ -54,18 +50,24 @@ function ModalAddCategoryProductComponent({ opened, onClose, onSuccess }) {
               className="w-[80px] h-[80px] mb-2"
             />
           ) : (
-            <div className="mb-2 w-[80px] h-[80px] bg-slate-200"></div>
+            <div className="mb-2 w-[80px] h-[80px] bg-slate-200 rounded-md"></div>
           )}
           <FileInput
             label="Ikon Kategori"
             placeholder="Upload"
-            size={"md"}
             leftSection={<BsUpload />}
             onChange={handleImageUpload}
+            accept="image/*"
           />
         </div>
         <div className="my-4">
-          <Button type="submit" size="md" fullWidth disabled={loading}>
+          <Button
+            type="submit"
+            color={"orange"}
+            size="md"
+            fullWidth
+            disabled={loading}
+          >
             Submit
           </Button>
         </div>

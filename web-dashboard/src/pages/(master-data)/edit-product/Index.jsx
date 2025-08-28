@@ -5,6 +5,7 @@ import {
   TextInput,
   Button,
   FileInput,
+  Tooltip,
 } from "@mantine/core";
 import { useEffect, useRef, useState } from "react";
 import { BsBank, BsChevronLeft, BsEye, BsInfo, BsUpload } from "react-icons/bs";
@@ -129,25 +130,25 @@ export default function EditProductPage() {
             <span>General Information *</span>
           </p>
           <div className="my-4">
-            <TextInput
-              label="Kode Produk (unique)"
-              placeholder="Barcode atau kode plu"
-              required
-              ref={inputFocus}
-              size="md"
-              type="number"
-              min="0"
-              value={form.sku_product}
-              onChange={(e) =>
-                setForm({ ...form, sku_product: e.target.value })
-              }
-            />
+            <Tooltip label="Sku produk harus unik dan berbeda">
+              <TextInput
+                label="Sku Produk (unique)"
+                placeholder="Barcode atau kode plu"
+                required
+                ref={inputFocus}
+                type="number"
+                min="0"
+                value={form.sku_product}
+                onChange={(e) =>
+                  setForm({ ...form, sku_product: e.target.value })
+                }
+              />
+            </Tooltip>
           </div>
           <div className="my-4">
             <TextInput
               label="Nama Produk"
               required
-              size={"md"}
               value={form.name_product}
               onChange={(e) =>
                 setForm({ ...form, name_product: e.target.value })
@@ -161,7 +162,7 @@ export default function EditProductPage() {
             <select
               id="category_id"
               required
-              className="w-full p-3 border-2 border-slate-200 outline-0"
+              className="w-full p-2 border-2 border-slate-200 outline-0"
               onChange={(e) =>
                 setForm({ ...form, category_id: e.target.value })
               }
@@ -185,7 +186,7 @@ export default function EditProductPage() {
             <select
               id="brand_id"
               required
-              className="w-full p-3 border-2 border-slate-200 outline-0 "
+              className="w-full p-2 border-2 border-slate-200 outline-0 "
               onChange={(e) => setForm({ ...form, brand_id: e.target.value })}
             >
               <option value={form.id_brand}>
@@ -208,8 +209,7 @@ export default function EditProductPage() {
           <div className="w-full my-4">
             <TextInput
               label="Harga Pokok"
-              leftSection={<span>RP</span>}
-              size="md"
+              leftSection={<span>IDR</span>}
               required
               type={"number"}
               min="0"
@@ -224,10 +224,8 @@ export default function EditProductPage() {
                 <p className="mr-2">Min Qty &gt;=</p>
                 <div className="w-[80%]">
                   <Input
-                    size="md"
                     type={"number"}
                     min="0"
-                    placeholder="Grosir 2"
                     value={grosir.min_qty}
                     onChange={(e) => changeQtyGrosir(index, e.target.value)}
                   />
@@ -237,8 +235,7 @@ export default function EditProductPage() {
               <div className="md:w-1/2 w-full mb-2 mr-2">
                 <Input
                   placeholder=""
-                  leftSection={<span>Rp</span>}
-                  size="md"
+                  leftSection={<span>IDR</span>}
                   min="0"
                   type="number"
                   value={grosir.price_grosir}
@@ -256,9 +253,9 @@ export default function EditProductPage() {
           <div className="my-4 w-full">
             <Switch
               label="Tampilkan Produk"
-              size="md"
               value={form.display_product}
               checked={form.display_product}
+              color="green"
               onChange={(e) =>
                 setForm({ ...form, display_product: e.currentTarget.checked })
               }
@@ -269,6 +266,7 @@ export default function EditProductPage() {
               label="Tampilkan Stok"
               size={"md"}
               value={form.display_stock}
+              color="green"
               checked={form.display_stock}
               onChange={(e) =>
                 setForm({ ...form, display_stock: e.currentTarget.checked })
@@ -305,7 +303,6 @@ export default function EditProductPage() {
             <FileInput
               leftSection={<BsUpload />}
               placeholder="Upload gambar"
-              size={"md"}
               type="image/*"
               onChange={handleUploadImage}
             />
@@ -313,7 +310,6 @@ export default function EditProductPage() {
           <div className="w-full my-4">
             <Textarea
               label="Deskripsi"
-              size={"md"}
               required
               rows="5"
               value={form.description_product}
@@ -324,7 +320,13 @@ export default function EditProductPage() {
           </div>
         </div>
         <div className="w-full my-4">
-          <Button fullWidth size="md" type="submit" loading={loading}>
+          <Button
+            fullWidth
+            size="md"
+            color={"orange"}
+            type="submit"
+            loading={loading}
+          >
             Save
           </Button>
         </div>
