@@ -1,7 +1,6 @@
 const express = require("express")
 require("dotenv").config()
 const App = require("./config/app")
-const MobileRouter = require("./router/mobileApi.router")
 const MobileRouterV2 = require("./router/mobileApiV2.router")
 const baseMiddleware = require("./config/baseMiddleware")
 const { webApiV2 } = require("./router/webApiV2.router")
@@ -12,6 +11,6 @@ app.get("/", Response.index)
 app.use("/dashboard-api/v2", webApiV2)
 app.use("/mobile-api/v2", MobileRouterV2)
 app.use("/", Response.notFound)
-app.listen(App.PORT, "0.0.0.0.", () => {
+app.listen(App.PORT, "0.0.0.0", () => {
     console.log(`Server running in http://localhost:${App.PORT}`)
 })
